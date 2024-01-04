@@ -16,6 +16,9 @@
     <meta property="og:image" content="" />
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/imgs/theme/favicon.svg' %}" />
+    <!-- Libs CSS -->
+    <link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/libs/feather-webfont/dist/feather-icons.css' %}" rel="stylesheet" />
     <!--  CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins/slider-range.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/main2cc5.css' %}" />
@@ -25,11 +28,11 @@
     {% include 'partials/quickview.html' %}
     {% include 'partials/navigation.html' %}
     <!--End header-->
-    
+
     {% block content %}
-    
+
     {% endblock content%}
-    
+
     {% include 'partials/footer.html' %}
     {% include 'partials/preloader.html' %}
 
@@ -57,6 +60,7 @@
     <!--   JS -->
     <script src="{% static 'assets/js/main2cc5.js' %}"></script>
     <script src="{% static 'assets/js/shop2cc5.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/validation.js' %}"></script>
 </body>
 
 </html>

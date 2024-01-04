@@ -122,7 +122,7 @@ JAZZMIN_SETTINGS = {
     "show_ui_builder": False,
     "site_header": "Treasure Trunk",
     "site_brand": "",
-    "site_logo": "assets/imgs/admin.png",
+    "site_logo": "assets/images/admin.png",
     "copyright": "SinhaAmrit",
 }
 
