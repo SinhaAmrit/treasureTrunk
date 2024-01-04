@@ -1,10 +1,9 @@
-{% extends 'partials/auth-layout.html' %}
+{% extends 'partials/base.html' %}
 {%load static%}
 {% block content %}
 <main>
     <!-- section -->
-
-    <section class="my-lg-14 my-8">
+    <section class="my-lg-14 my-8 pt-150 pb-100">
         <!-- container -->
         <div class="container">
             <!-- row -->
@@ -51,7 +50,6 @@
                                     <label for="formSignupPassword" class="form-label visually-hidden">Password</label>
                                     <div class="password-field position-relative">
                                         {{form.password1}}
-                                        <span><i class="bi bi-eye-slash passwordToggler"></i></span>
                                         <div class="invalid-feedback">Please enter password.</div>
                                     </div>
                                 </div>
@@ -69,7 +67,6 @@
                             <!-- btn -->
                             <div class="col-12 d-grid"><button type="submit" class="btn btn-primary">Register</button>
                             </div>
-
                             <!-- text -->
                             <p>
                                 <small>
@@ -86,5 +83,4 @@
         </div>
     </section>
 </main>
-
 {% endblock content %}
