@@ -19,3 +19,11 @@ def index(request):
     ).order_by("-date")
     context = {"products": products}
     return render(request, "core/index.html", context)
+
+
+def product_list_view(request):
+    products = Product.objects.filter(
+        product_status="published", featured=True
+    ).order_by("-date")
+    context = {"products": products}
+    return render(request, "core/product-list.html", context)
