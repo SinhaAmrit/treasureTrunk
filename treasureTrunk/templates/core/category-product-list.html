@@ -7,10 +7,11 @@
             <div class="archive-header">
                 <div class="row align-items-center">
                     <div class="col-xl-3">
-                        <h1 class="mb-15">Categories</h1>
+                        <h1 class="mb-15"><img class="w-36px mr-10" src="{{category.image.url}}"
+                                alt="" />{{category.title}}</h1>
                         <div class="breadcrumb">
                             <a href='/' rel='nofollow'><i class="fi-rs-home mr-5"></i>Home</a>
-                            <span></span> Categories
+                            <span></span> {{category.title}}
                         </div>
                     </div>
                 </div>
@@ -24,9 +25,7 @@
                     <div class="shop-product-fillter mb-50">
                         <div class="totall-product">
                             <h2>
-                                <img class="w-36px mr-10" src="{% static 'assets/imgs/theme/icons/category-1.svg' %}"
-                                    alt="" />
-                                {{categories.count}} Categorie{{categories.count|pluralize:"s"}}
+                                {{products.count}} Product{{products.count|pluralize:"s"}}
                             </h2>
                         </div>
                         <div class="sort-by-product-area">
@@ -71,29 +70,61 @@
                     </div>
                     <div class="loop-grid">
                         <div class="row">
-                            {% for c in categories %}
-                            <article class="col-xl-3 col-lg-4 col-md-6 text-center hover-up mb-30 animated">
-                                <div class="post-thumb">
-                                    <a href="{% url 'core:category-product-list' c.cid %}">
-                                        <img class="border-radius-15" src="{{c.image.url}}" alt="{{c.title}} logo" />
-                                    </a>
-                                    <div class="entry-meta">
-                                        <a class='entry-meta meta-2' href='#'><i class="fi-rs-heart"></i></a>
+                            <!--start product card-->
+                            {% for p in products %}
+                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a href='shop-product-right.html'>
+                                                <img class="default-img" src="{{ p.image.url }}" alt="" />
+                                                <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                            </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                            <a aria-label='Add To Wishlist' class='action-btn'
+                                                href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
+                                            <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i
+                                                    class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                            <span class="hot">-{{p.get_percentage|floatformat:0}}%</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="entry-content-2">
-                                    <h4 class="post-title mb-15">
-                                        <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
-                                    </h4>
-                                    <div class="entry-meta font-xs color-grey mt-10 pb-10">
+                                    <div class="product-content-wrap">
+                                        <div class="product-category">
+                                            <a href='shop-grid-right.html'>{{ p.category.title }}</a>
+                                        </div>
+                                        <h2><a href='shop-product-right.html'>{{ p.title }}</a>
+                                        </h2>
+                                        <div class="product-rate-cover">
+                                            <div class="product-rate d-inline-block">
+                                                <div class="product-rating" style="width: 90%"></div>
+                                            </div>
+                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        </div>
                                         <div>
-                                            <span class="hit-count  mr-10">{{c.category.count}}
-                                                Product{{c.category.count|pluralize:"s"}}</span>
+                                            <span class="font-small text-muted">By <a
+                                                    href='vendor-details-1.html'>{{p.vendor.title}}</a></span>
+                                        </div>
+                                        <div class="product-card-bottom">
+                                            <div class="product-price">
+                                                <span>₹{{p.price}}</span>
+                                                <span class="old-price">₹{{p.old_price}}</span>
+                                            </div>
+                                            <div class="add-cart">
+                                                <a class='add' href='shop-cart.html'><i
+                                                        class="fi-rs-shopping-cart mr-5"></i>Add
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </article>
-                            {%endfor%}
+                            </div>
+                            {% endfor %}
+                            <!--end product card-->
                         </div>
                     </div>
                     <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
