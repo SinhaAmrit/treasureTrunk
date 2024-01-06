@@ -15,16 +15,9 @@
                         <form action="#">
                             <select class="select-active">
                                 <option>All Categories</option>
-                                <option>Milks and Dairies</option>
-                                <option>Wines & Alcohol</option>
-                                <option>Clothing & Beauty</option>
-                                <option>Pet Foods & Toy</option>
-                                <option>Fast food</option>
-                                <option>Baking material</option>
-                                <option>Vegetables</option>
-                                <option>Fresh Seafood</option>
-                                <option>Noodles & Rice</option>
-                                <option>Ice cream</option>
+                                {% for c in categories %}
+                                <option>{{c.title}}</option>
+                                {% endfor %}
                             </select>
                             <input type="text" placeholder="Search for items..." />
                         </form>
@@ -190,10 +183,7 @@
                                     <a href='/about'>About</a>
                                 </li>
                                 <li>
-                                    <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href='/'>Vendors list</a></li>
-                                    </ul>
+                                    <a href="{% url 'core:vendor-list' %}">Vendors</a>
                                 </li>
                                 <!-- <li class="position-static">
                                     <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
@@ -379,10 +369,7 @@
                             <a href='/'>Home</a>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Vendors</a>
-                            <ul class="dropdown">
-                                <li><a href='#'>Vendors List</a></li>
-                            </ul>
+                            <a href="{% url 'core:vendor-list' %}">Vendors</a>
                         </li>
                         <!-- <li class="menu-item-has-children">
                             <a href="#">Mega menu</a>

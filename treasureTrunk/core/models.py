@@ -62,7 +62,6 @@ class Vendor(models.Model):
     title = models.CharField(max_length=100, default="")
     image = models.ImageField(upload_to=user_directory_path, default="vendor.jpg")
     description = models.TextField(null=True, blank=True, default="")
-
     address = models.CharField(max_length=100, default="")
     contact = models.CharField(max_length=100, default="")
     chat_resp_time = models.CharField(max_length=100, default="100")
@@ -70,8 +69,8 @@ class Vendor(models.Model):
     authentic_rating = models.CharField(max_length=100, default="100")
     days_return = models.CharField(max_length=100, default="100")
     warrenty_period = models.CharField(max_length=100, default="100")
-
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Vendors"
@@ -91,7 +90,9 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, related_name="category"
     )
-    vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True)
+    vendor = models.ForeignKey(
+        Vendor, on_delete=models.SET_NULL, null=True, related_name="product"
+    )
     title = models.CharField(max_length=100, default="")
     image = models.ImageField(upload_to=user_directory_path, default="product.jpg")
     description = models.TextField(null=True, blank=True, default="")
