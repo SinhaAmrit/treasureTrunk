@@ -88,14 +88,14 @@ class Product(models.Model):
         unique=True, length=10, max_length=20, alphabet="abcdefgh12345"
     )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, related_name="category"
+    )
     vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100, default="")
     image = models.ImageField(upload_to=user_directory_path, default="product.jpg")
     description = models.TextField(null=True, blank=True, default="")
-    price = models.DecimalField(
-        max_digits=999999999999, decimal_places=2, default=""
-    )
+    price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="")
     old_price = models.DecimalField(
         max_digits=999999999999, decimal_places=2, default=""
     )
@@ -139,9 +139,7 @@ class ProductImages(models.Model):
 
 class CartOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    price = models.DecimalField(
-        max_digits=999999999999, decimal_places=2, default=""
-    )
+    price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="")
     paid_status = models.BooleanField(default=False)
     order_date = models.DateTimeField(auto_now_add=True)
     product_status = models.CharField(
@@ -159,12 +157,8 @@ class CartOrderItems(models.Model):
     item = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
     qty = models.IntegerField(default=0)
-    price = models.DecimalField(
-        max_digits=999999999999, decimal_places=2, default=""
-    )
-    total = models.DecimalField(
-        max_digits=999999999999, decimal_places=2, default=""
-    )
+    price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="")
+    total = models.DecimalField(max_digits=999999999999, decimal_places=2, default="")
 
     class Meta:
         verbose_name_plural = "Cart Order Items"
