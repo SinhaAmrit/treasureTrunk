@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # Custom applications
     "core",
     "taggit",
+    "ckeditor",
     "userauths",
 ]
 
@@ -162,3 +163,4 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 AUTH_USER_MODEL = "userauths.User"
+CKEDITOR_UPLOAD_PATH = "uploads/"
