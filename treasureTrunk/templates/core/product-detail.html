@@ -95,8 +95,9 @@
                                             </ul>
                                             <ul class="float-start">
                                                 <li class="mb-5">SKU: <a href="#">{{product.sku}}</a></li>
-                                                <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#"
-                                                        rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
+                                                <li class="mb-5">Tags: {% for tag in product.tags.all %}<a
+                                                        href="{% url 'core:tag-list' tag.slug %}" rel="tag">
+                                                        #{{tag.name}}</a>{% endfor %}</li>
                                                 <li>Stock:<span class="in-stock text-brand ml-5">{{product.stock_count}}
                                                         Items
                                                         In Stock</span>
@@ -430,12 +431,16 @@
                             <ul>
                                 <li>
                                     <i class="fi fi-rs-marker mr-10 text-brand"></i>
-                                    {% if address != None %}
+                                    {% if user.is_authenticated and address != None %}
                                     <span>
                                         {{address.address}}
                                         {% if address.status == True %}✔️{% else %}❗{% endif %}
                                     </span>
                                     <a href="#" class="change float-end">Change</a>
+                                    {% elif user.is_authenticated %}
+                                    <span>
+                                        <a class="change float" href="#">Add your address</a>
+                                    </span>
                                     {% else %}
                                     <span>
                                         <a class="change float" href="{% url 'userauths:sign-in' %}">Sign

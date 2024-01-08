@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Custom applications
     "core",
+    "taggit",
     "userauths",
 ]
 
@@ -48,7 +49,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                'core.context_processor.default',
+                "core.context_processor.default",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -160,4 +161,4 @@ JAZZMIN_UI_TWEAKS = {
     "actions_sticky_top": True,
 }
 
-AUTH_USER_MODEL = 'userauths.User'
+AUTH_USER_MODEL = "userauths.User"
