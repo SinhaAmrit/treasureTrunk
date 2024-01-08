@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from core.models import (
     Product,
     Category,
@@ -29,6 +29,20 @@ def product_list_view(request):
     return render(request, "core/product-list.html", context)
 
 
+def product_detail_view(request, pid):
+    product = get_object_or_404(Product, pid=pid)
+    related_products = Product.objects.filter(category=product.category).exclude(
+        pid=pid
+    )
+    p_image = product.p_images.all()
+    context = {
+        "p_image": p_image,
+        "product": product,
+        "related_products": related_products,
+    }
+    return render(request, "core/product-detail.html", context)
+
+
 def category_list_view(request):
     categories = Category.objects.all()
     context = {"categories": categories}
@@ -36,7 +50,7 @@ def category_list_view(request):
 
 
 def category_product_list_view(request, cid):
-    category = Category.objects.get(cid=cid)
+    category = get_object_or_404(Category, cid=cid)
     products = Product.objects.filter(product_status="published", category=category)
     context = {"category": category, "products": products}
     return render(request, "core/category-product-list.html", context)
@@ -49,7 +63,8 @@ def vendor_list_view(request):
 
 
 def vendor_detail_view(request, vid):
-    vendor = Vendor.objects.get(vid=vid)
+    # vendor = Vendor.objects.get(vid=vid)
+    vendor = get_object_or_404(Vendor, vid=vid)
     products = Product.objects.filter(product_status="published", vendor=vendor)
     context = {"vendor": vendor, "products": products}
     return render(request, "core/vendor-detail.html", context)
