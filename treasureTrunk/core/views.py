@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from taggit.models import Tag
 from core.models import (
     Product,
     Category,
@@ -68,3 +69,13 @@ def vendor_detail_view(request, vid):
     products = Product.objects.filter(product_status="published", vendor=vendor)
     context = {"vendor": vendor, "products": products}
     return render(request, "core/vendor-detail.html", context)
+
+
+def tag_list_view(request, tag_slug):
+    products = Product.objects.filter(product_status="published").order_by("-id")
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        products = products.filter(tags__in=[tag])
+    context = {"products": products, "tag": tag}
+    return render(request, "core/tag-list.html", context)

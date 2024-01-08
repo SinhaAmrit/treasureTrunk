@@ -1,10 +1,9 @@
-from email.policy import default
-from pyexpat import model
-from unicodedata import decimal
 from django.db import models
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from userauths.models import User
+from taggit.managers import TaggableManager
+from ckeditor_uploader.fields import RichTextUploadingField
 
 STATUS_CHOICE = (
     ("process", "Processing"),
@@ -61,7 +60,8 @@ class Vendor(models.Model):
 
     title = models.CharField(max_length=100, default="")
     image = models.ImageField(upload_to=user_directory_path, default="vendor.jpg")
-    description = models.TextField(null=True, blank=True, default="")
+    # description = models.TextField(null=True, blank=True, default="")
+    description = RichTextUploadingField(null=True, blank=True, default="")
     address = models.CharField(max_length=100, default="")
     contact = models.CharField(max_length=100, default="")
     chat_resp_time = models.CharField(max_length=100, default="100")
@@ -95,17 +95,19 @@ class Product(models.Model):
     )
     title = models.CharField(max_length=100, default="")
     image = models.ImageField(upload_to=user_directory_path, default="product.jpg")
-    description = models.TextField(null=True, blank=True, default="")
+    # description = models.TextField(null=True, blank=True, default="")
+    description = RichTextUploadingField(null=True, blank=True, default="")
     price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="")
     old_price = models.DecimalField(
         max_digits=999999999999, decimal_places=2, default=""
     )
-    specification = models.TextField(null=True, blank=True)
+    # specification = models.TextField(null=True, blank=True)
+    specification = RichTextUploadingField(null=True, blank=True)
     type = models.CharField(max_length=100, default="")
     stock_count = models.IntegerField(null=True, blank=True)
     life = models.CharField(max_length=100, blank=True)
     mfd = models.DateField(auto_now_add=False, null=True, blank=True)
-    # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+    tags = TaggableManager(blank=True)
     product_status = models.CharField(
         choices=STATUS, max_length=10, default="in_review"
     )

@@ -5,6 +5,7 @@ from core.views import (
     index,
     product_detail_view,
     product_list_view,
+    tag_list_view,
     vendor_detail_view,
     vendor_list_view,
 )
@@ -14,6 +15,8 @@ app_name = "core"
 urlpatterns = [
     # Home
     path("", index, name="index"),
+    # tags
+    path("products/tags/<slug:tag_slug>", tag_list_view, name="tag-list"),
     # Products
     path("products/", product_list_view, name="product-list"),
     path("product/<pid>/", product_detail_view, name="product-detail"),

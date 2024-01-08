@@ -1,7 +1,16 @@
 from django.contrib import admin
 from userauths.models import User
 
+
 class UserAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "username", "email", "bio", "last_login", "date_joined"]
+    list_display = [
+        "username",
+        "first_name",
+        "email",
+        "bio",
+        "last_login",
+        "date_joined",
+    ]
+
 
 admin.site.register(User, UserAdmin)
