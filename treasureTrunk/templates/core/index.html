@@ -55,7 +55,7 @@
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href='#'>
+                                                <a href={% url 'core:product-detail' p.pid %}>
                                                     <img class="default-img" src="{{ p.image.url }}" alt="" />
                                                     <img class="hover-img" src="{{ p.image.url }}" alt="" />
                                                 </a>
@@ -65,18 +65,16 @@
                                                         class="fi-rs-heart"></i></a>
                                                 <a aria-label='Compare' class='action-btn' href='#'><i
                                                         class="fi-rs-shuffle"></i></a>
-                                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                            </div>
+                                                </div>
                                             <div class="product-badges product-badges-position product-badges-mrg">
                                                 <span class="hot">-{{p.get_percentage|floatformat:0}}%</span>
                                             </div>
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href='#'>{{ p.category.title }}</a>
+                                                <a href={% url 'core:category-product-list' p.category.cid %}>{{ p.category.title }}</a>
                                             </div>
-                                            <h2><a href='#'>{{ p.title }}</a>
+                                            <h2><a href={% url 'core:product-detail' p.pid %}>{{ p.title }}</a>
                                             </h2>
                                             <div class="product-rate-cover">
                                                 <div class="product-rate d-inline-block">
@@ -86,7 +84,7 @@
                                             </div>
                                             <div>
                                                 <span class="font-small text-muted">By <a
-                                                        href='#'>{{p.vendor.title}}</a></span>
+                                                        href={% url 'core:vendor-detail' p.vendor.vid %}>{{p.vendor.title}}</a></span>
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
