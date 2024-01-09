@@ -86,3 +86,10 @@ def tag_list_view(request, tag_slug):
         products = products.filter(tags__in=[tag])
     context = {"products": products, "tag": tag}
     return render(request, "core/tag-list.html", context)
+
+
+def search_view(request):
+    query = request.GET.get("query")
+    products = Product.objects.filter(title__icontains=query).order_by("-date")
+    context = {"products": products, "query": query}
+    return render(request, "core/search.html", context)

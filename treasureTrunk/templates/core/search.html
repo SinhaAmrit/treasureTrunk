@@ -2,35 +2,36 @@
 {%load static%}
 {% block content %}
 <main class="main">
-    <div class="page-header breadcrumb-wrap">
+    <div class="page-header mt-30 mb-50">
         <div class="container">
-            <div class="breadcrumb">
-                <a href='/' rel='nofollow'><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Store <span></span> {{vendor.title|title}}
-            </div>
-        </div>
-    </div>
-    <div class="container mb-30">
-        <div class="archive-header-2 text-center pt-80 pb-50">
-            <h1 class="display-2 mb-50">{{vendor.title|title}} Store</h1>
-            <div class="row">
-                <div class="col-lg-5 mx-auto">
-                    <div class="sidebar-widget-2 widget_search mb-50">
-                        <div class="search-form">
-                            <form action="#">
-                                <input type="text" placeholder="Search in this store..." />
-                                <button type="submit"><i class="fi-rs-search"></i></button>
-                            </form>
+            <div class="archive-header">
+                <div class="row align-items-center">
+                    <div class="col-xl-3">
+                        {% if products.count != 0 %}
+                        <h1 class="mb-15">{{query|title}}</h1>
+                        {% else %}
+                        <h1 class="mb-15">No Items Found</h1>
+                        {% endif %}
+                        <div class="breadcrumb">
+                            <a href='/' rel='nofollow'><i class="fi-rs-home mr-5"></i>Home</a>
+                            <span></span> {{query|title}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row flex-row-reverse">
-            <div class="col-lg-4-5">
+    </div>
+    <div class="container mb-30">
+        <div class="row">
+            <div class="col-lg">
                 <div class="shop-product-fillter">
                     <div class="totall-product">
-                        <p>We found <strong class="text-brand">{{vendor.product.count}}</strong> items for you!</p>
+                        {% if products.count != 0 %}
+                        <p>We found <strong class="text-brand">{{products.count}}</strong> items for you!</p>
+                        {% else %}
+                        <p>Go Back to <strong class="text-brand"><a href="{% url 'core:index' %}">Home
+                                    Page</a></strong>!</p>
+                        {% endif %}
                     </div>
                     <div class="sort-by-product-area">
                         <div class="sort-by-cover mr-10">
@@ -86,10 +87,12 @@
                                     </a>
                                 </div>
                                 <div class="product-action-1">
-                                    <a aria-label='Add To Wishlist' class='action-btn' href='#'><i class="fi-rs-heart"></i></a>
-                                    <a aria-label='Compare' class='action-btn' href='#'><i class="fi-rs-shuffle"></i></a>
-                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                            class="fi-rs-eye"></i></a>
+                                    <a aria-label='Add To Wishlist' class='action-btn' href='#'><i
+                                            class="fi-rs-heart"></i></a>
+                                    <a aria-label='Compare' class='action-btn' href='#'><i
+                                            class="fi-rs-shuffle"></i></a>
+                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                        data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">-{{p.get_percentage|floatformat:0}}%</span>
@@ -97,7 +100,8 @@
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
-                                    <a href={% url 'core:category-product-list' p.category.cid %}>{{ p.category.title }}</a>
+                                    <a href={% url 'core:category-product-list' p.category.cid %}>{{ p.category.title
+                                        }}</a>
                                 </div>
                                 <h2><a href={% url 'core:product-detail' p.pid %}>{{ p.title }}</a>
                                 </h2>
@@ -108,7 +112,8 @@
                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                 </div>
                                 <div>
-                                    <span class="font-small text-muted">By <a href={% url 'core:vendor-detail' p.vendor.vid %}>{{p.vendor.title}}</a></span>
+                                    <span class="font-small text-muted">By <a href={% url 'core:vendor-detail'
+                                            p.vendor.vid %}>{{p.vendor.title}}</a></span>
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
@@ -145,63 +150,6 @@
                     </nav>
                 </div>
                 <!--End Deals-->
-            </div>
-            <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
-                <div class="sidebar-widget widget-store-info mb-30 bg-3 border-0">
-                    <div class="vendor-logo mb-30">
-                        <img src="{{vendor.image.url}}" alt="{{vendor.title}} Logo" />
-                    </div>
-                    <div class="vendor-info">
-                        <div class="product-category">
-                            <span class="text-muted">Since {{vendor.date|date:"Y"}}</span>
-                        </div>
-                        <h4 class="mb-5"><a class='text-heading' href="#">{{vendor.title}}</a></h4>
-                        <div class="product-rate-cover mb-15">
-                            <div class="product-rate d-inline-block">
-                                <div class="product-rating" style="width: 90%"></div>
-                            </div>
-                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                        </div>
-                        <div class="vendor-des mb-30">
-                            <p class="font-sm text-heading">{{vendor.description}}</p>
-                        </div>
-                        <div class="follow-social mb-20">
-                            <h6 class="mb-15">Follow Us</h6>
-                            <ul class="social-network">
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="assets/imgs/theme/icons/social-tw.svg" alt="" />
-                                    </a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="assets/imgs/theme/icons/social-fb.svg" alt="" />
-                                    </a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="assets/imgs/theme/icons/social-insta.svg" alt="" />
-                                    </a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="assets/imgs/theme/icons/social-pin.svg" alt="" />
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="vendor-info">
-                            <ul class="font-sm mb-20">
-                                <li><img class="mr-5" src="assets/imgs/theme/icons/icon-location.svg"
-                                        alt="" /><strong>Address: </strong> <span>{{vendor.address}}</span></li>
-                                <li><img class="mr-5" src="assets/imgs/theme/icons/icon-contact.svg"
-                                        alt="" /><strong>Call Us:</strong><span>{{vendor.contact}}</span></li>
-                            </ul>
-                            <a class='btn btn-xs' href='#'>Contact Seller <i
-                                    class="fi-rs-arrow-small-right"></i></a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

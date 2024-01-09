@@ -12,14 +12,14 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
+                        <form action="{% url 'core:search' %}" method="GET">
                             <select class="select-active">
                                 <option>All Categories</option>
                                 {% for c in categories %}
                                 <option>{{c.title}}</option>
                                 {% endfor %}
                             </select>
-                            <input type="text" placeholder="Search for items..." />
+                            <input type="text" name="query" placeholder="Search for items..." />
                         </form>
                     </div>
                     <div class="header-action-right">
@@ -28,19 +28,6 @@
                                 <form action="#">
                                     <select class="select-active">
                                         <option>Your Location</option>
-                                        <option>Alabama</option>
-                                        <option>Alaska</option>
-                                        <option>Arizona</option>
-                                        <option>Delaware</option>
-                                        <option>Florida</option>
-                                        <option>Georgia</option>
-                                        <option>Hawaii</option>
-                                        <option>Indiana</option>
-                                        <option>Maryland</option>
-                                        <option>Nevada</option>
-                                        <option>New Jersey</option>
-                                        <option>New Mexico</option>
-                                        <option>New York</option>
                                     </select>
                                 </form>
                             </div>
@@ -384,7 +371,7 @@
             <div class="mobile-search search-style-3 mobile-header-border">
                 <form action="#">
                     <input type="text" placeholder="Search for items…" />
-                    <button type="submit"><i class="fi-rs-search"></i></button>
+                    <!-- <button type="submit"><i class="fi-rs-search"></i></button> -->
                 </form>
             </div>
             <div class="mobile-menu-wrap mobile-header-border">
