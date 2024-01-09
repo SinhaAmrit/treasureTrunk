@@ -177,16 +177,39 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a class='active' href='/'>Home</a>
+                                    {% if request.path == '/' %}
+                                    <a href="{% url 'core:index' %}" class="active">Home</a>
+                                    {% else %}
+                                    <a href='/'>Home</a>
+                                    {% endif %}
                                 </li>
                                 <li>
-                                    <a href='/about'>About</a>
+                                    {% if request.path == '/about/' %}
+                                    <a href="#" class='active'>About</a>
+                                    {% else %}
+                                    <a href="#">About</a>
+                                    {% endif %}
                                 </li>
                                 <li>
+                                    {% if request.path == '/products/' %}
+                                    <a href="{% url 'core:product-list' %}" class='active'>Shop</a>
+                                    {% else %}
                                     <a href="{% url 'core:product-list' %}">Shop</a>
+                                    {% endif %}
                                 </li>
                                 <li>
+                                    {% if request.path == '/categories/' %}
+                                    <a href="{% url 'core:category-list' %}" class='active'>Categories</a>
+                                    {% else %}
+                                    <a href="{% url 'core:category-list' %}">Categories</a>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    {% if request.path == '/vendors/' %}
+                                    <a href="{% url 'core:vendor-list' %}" class='active'>Vendors</a>
+                                    {% else %}
                                     <a href="{% url 'core:vendor-list' %}">Vendors</a>
+                                    {% endif %}
                                 </li>
                                 <!-- <li class="position-static">
                                     <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
